@@ -2,6 +2,7 @@
 //  Copyright (c) 2013 Rafael Kayumov. License: MIT.
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef enum {
     TabStateEnabled,

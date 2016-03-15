@@ -239,7 +239,7 @@
         titleLabel.numberOfLines = 2;
         titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.adjustsLetterSpacingToFitWidth = YES;
+//        titleLabel.adjustsLetterSpacingToFitWidth = YES;
         titleLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
         
         UIFont *font = nil;
@@ -263,7 +263,16 @@
         titleLabel.textColor = textColor;
         titleLabel.backgroundColor = [UIColor clearColor];
         
-        titleSize = [tabItem.titleString sizeWithFont:titleLabel.font constrainedToSize:CGSizeMake(tab.bounds.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
+//        [tabItem.titleString sizeWithFont:titleLabel.font constrainedToSize:CGSizeMake(tab.bounds.size.width, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
+        
+        NSAttributedString *attributedText =
+        [[NSAttributedString alloc] initWithString:tabItem.titleString
+                                        attributes:@{NSFontAttributeName: titleLabel.font}];
+        CGRect rect = [attributedText boundingRectWithSize:(CGSize){tab.bounds.size.width, CGFLOAT_MAX}
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                   context:nil];
+        titleSize = rect.size;
+        
         titleLabel.text = tabItem.titleString;
     }
     
